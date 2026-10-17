@@ -1,29 +1,38 @@
 #include <stdio.h>
-#include<unistd.h>
+#include <unistd.h>    // sleep, fork, execlp, _exit
+#include <sys/wait.h>  // waitpid
 
 int main(void) {
-    int option;
+    int userInput;
+    printf("Welcome to TypeByter \nPlease pick the mode you want to do! \n");
+    printf("1) TypingTest\n2) CarrerMode (doesnt work)\n");
 
-    printf("TypeByter, just pick the mode you want\n");
-    printf("1) Start random time trial\n");
-    printf("2) Mode two (ka was ich hier machen werde)\n");
-    printf("Your choice: ");
-    scanf("%d", &option);
+    scanf("%d", &userInput);
 
-    if (option == 1) {
-        printf("You picked the time trial, you will be sent into the trial!\n please wait until the Realm has opened.");
+    if (userInput == 1) {
+        printf("\nYou picked the typing test, a second terminal should open.\n");
         sleep(1);
-        printf("3");
-        sleep(1);
-        printf("2");
-        sleep(1);
-        printf("1");
-        sleep(1);
-        printf("Be ready to defend your System");
-    } else if (option == 2) {
-        printf("You picked mode two\n");
-    } else {
-        printf("Invalid choice\n");
+        printf("Please wait a few seconds\n");
+        sleep(2);
+
+        //pid_t variable typ,
+        //pid ist ne variable
+        //fork kopiert programm, und halt returned nummer von dem pid
+        
+        pid_t pid = fork();
+        if (pid == -1) {
+            perror("fork");
+            return 1;
+        }
+
+        if (pid == 0) {
+            execlp("gnome-terminal", "gnome-terminal", "--wait", "--", "./typer", (char *)NULL);
+            perror("execlp");   // only runs if execlp failed
+            _exit(1);
+        }
+        waitpid(pid, NULL, 0);
+        printf("Typing test finished, back in the menu.\n");
     }
+
     return 0;
 }

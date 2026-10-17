@@ -1,0 +1,13 @@
+# compiled programs
+main
+typer
+
+# object files and libraries
+*.o
+*.out
+*.a
+*.so
+
+# editor files
+.vscode/
+*.swp
