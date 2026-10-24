@@ -1,5 +1,1 @@
-TypeByter is a fun personal copy of MonkeyType, its supposed to be used in the terminal and I hope it will be a good other option to use offline!
-This will be used as the default text writing tester! No idea if im even using proper grammar,
-I still have to type a few more stuff, since otherwise the first text will be a bit too small to be used,
-Almost done! 10 more Words.
-These are the final words! XD im not counting allat, probably more than 10 words! XD
+TypeByter is a fun personal copy of MonkeyType, its supposed to be used in the terminal and I hope it will be a good other option to use offline! This will be used as the default text writing tester! No idea if im even using proper grammar, I still have to type a few more stuff, since otherwise the first text will be a bit too small to be used, Almost done! 10 more Words. These are the final words! XD im not counting allat, probably more than 10 words! XD
