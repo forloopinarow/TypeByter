@@ -7,7 +7,21 @@ int main(int argc, char *argv[])
         printf("Usage: ./typer <filepath>\n");
         return 1;
     }
-    printf("%s\n", argv[1]); // aus argument path printen
+
+    FILE *f = fopen(argv[1], "r");
+    if (f == NULL) {
+        perror("fopen"); 
+        sleep(5);         
+        return 1;
+    }
+
+    int c;
+    while ((c = fgetc(f)) != EOF) {
+        putchar(c);
+    }
+    fclose(f);
+
+    printf("\n");
     sleep(5);
     return 0;
 }
