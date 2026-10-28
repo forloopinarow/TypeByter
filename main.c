@@ -26,7 +26,9 @@ int main(void)
 
         pid_t pid = fork();
         if (pid == 0) {
-        execlp("gnome-terminal", "gnome-terminal", "--wait", "--", "./typer", filepath, (char *)NULL);
+        //only works for gnomes terminal, might rewrite it later
+        // probably not tho
+        execlp("gnome-terminal", "gnome-terminal", "--wait", "--", "./typer", filepath, (char *)NULL); 
         perror("execlp");
         _exit(1);
 }
