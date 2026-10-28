@@ -11,3 +11,5 @@ typer
 # editor files
 .vscode/
 *.swp
+.idea
+

@@ -1,64 +1,41 @@
 #include <stdio.h>
-#include <string.h>     // strcspn
-#include <unistd.h>     // sleep, fork, execlp, _exit
-#include <sys/types.h>  // pid_t
-#include <sys/wait.h>   // waitpid
+#include <unistd.h> // for fork apparently
+#include <sys/types.h> /* for pid_t */
+#include <sys/wait.h> /* for wait */
 
 int main(void)
 {
-    int choice;
-    char filePath[512];
+    printf("Hello World \n");
+    printf("Pick your mode \n");
+    printf("1) Testing \n");
+    printf("2) Doesnt work \n");
 
-    printf("Welcome to TypeByter\nPlease pick the mode you want to do!\n");
-    printf("1) TypingTest\n2) CareerMode (doesn't work)\n");
-
-    if (scanf("%d", &choice) != 1) {
-        printf("Invalid input.\n");
+    int userInput;
+    char filepath[512];
+    if(scanf("%d", &userInput) != 1){
+        printf("User Input couldnt be read \n");
         return 1;
     }
+    printf("%d \n",userInput);
 
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) { }
-
-    if (choice == 1) {
-        printf("\nEnter the path of the file: ");
-
-        if (fgets(filePath, sizeof(filePath), stdin) == NULL) {
-            printf("Could not read input.\n");
-            return 1;
-        }
-        filePath[strcspn(filePath, "\n")] = '\0';
-
-        if (filePath[0] == '\0') {
-            printf("No path entered.\n");
-            return 1;
-        }
-
-        printf("\nYou picked the typing test, a second terminal should open.\n");
-        sleep(1);
-        printf("Please wait a few seconds\n");
-        sleep(2);
+    switch (userInput) {
+        case 1:
+        printf("Filepath for the txt that should be tried? \n");
+        scanf("%511s", filepath);
+        printf("Chosen file path: %s \n",filepath);
 
         pid_t pid = fork();
-
-        if (pid == -1) {
-            perror("fork");
-            return 1;
-        }
-
         if (pid == 0) {
-            // Child: gnome-terminal runs ./typer <filePath>
-            execlp("gnome-terminal", "gnome-terminal", "--wait", "--",
-                   "./typer", filePath, (char *)NULL);
-            perror("execlp");   // only reached if execlp failed
-            _exit(1);
-        }
+        execlp("gnome-terminal", "gnome-terminal", "--wait", "--", "./typer", filepath, (char *)NULL);
+        perror("execlp");
+        _exit(1);
+}
         waitpid(pid, NULL, 0);
-        printf("Typing test finished, back in the menu.\n");
-    }
-    else if (choice == 2) {
-        printf("Career mode doesn't work yet.\n");
-    }
+        break;
 
+        default:
+        printf("Only 1 works \n");
+    }
     return 0;
+    
 }
