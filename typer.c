@@ -1,21 +1,48 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+
+char *read_file(char *filename);
 
 int main(int argc, char *argv[]){
     printf("Filepath given: %s \n", argv[1]);
-    FILE *pFile = fopen(argv[1], "r");
-    char buffer[1024] = {0};
-
-    if(pFile == NULL){
-        printf("Couldnt open/find the file ig");
+    char *file_contents = read_file(argv[1]);
+    if(file_contents == NULL){
+        printf("Content null\n");
         return 1;
     }
 
-    while(fgets(buffer, sizeof(buffer), pFile) != NULL){
-        printf("%s\n",buffer);
-    }
+    sleep(3);
 
-    sleep(10);
-    fclose(pFile);
+    printf("File Content: %s",file_contents);
+    fflush(stdout);
+
+    sleep(5);
     return 0;
+}
+
+char *read_file(char *filename){
+    FILE *file;
+
+    file = fopen(filename, "r");
+
+    if(file == NULL) return NULL;
+
+    fseek(file,0,SEEK_END);
+    int length = ftell(file);
+    fseek(file,0,SEEK_SET);
+
+    char *string = malloc(sizeof(char) * (length+1));
+
+    int c;
+    int i =0;
+    while ((c = fgetc(file))!= EOF){
+        string[i] = c;
+        i++;
+    }
+    string[i] = '\0';
+
+    fclose(file);
+
+    return string;
 }
