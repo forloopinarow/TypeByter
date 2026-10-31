@@ -40,20 +40,23 @@ int main(int argc, char *argv[]){
         typed[strcspn(typed, "\n")] = '\0';
     }
 
-    
+    char string[2];
     
     if(strcmp(file_contents,typed) ==0){
         time_t finish = time(NULL);
         double timeTaken = difftime(finish,start);
-        printf("Succesfull, time taken was %f\n", timeTaken);
         double minutes = timeTaken / 60.0;
         double wpm = ((double)length / 5.0) / minutes;
-        printf("WPM: %.2f\n", wpm);
+        printf("Great job, you finished, here are your stats!\n===========================================================================\nTime taken: %.1f\nWPM: %.2f\nRelative/Absolutepath: %s \nCharacters: %d\n===========================================================================\n", timeTaken,wpm,argv[1],length);
+        fflush(stdout);
+        //printf("WPM: %.2f\n", wpm);
+    }
+    else{
+        printf("Sadly you didnt write the same Text\n just try again later! Good attempt tho");
     }
 
-    
+    sleep(15);
 
-    sleep(5);
     return 0;
 }
 
