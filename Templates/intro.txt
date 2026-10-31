@@ -1,4 +1,1 @@
-This is the default textfile that you can use to test your speed!
-This is the second line, ill make two other ones.
-Here we go, this is the third one.
-And now the final line that you need to write XD
+This is the intro for typebyter, im just testing it rn since im kind of bored, will probably actually make it look good since I dont really like the curent wa the prorgramm works, the startup is fine, but the rest seems horrendous
