@@ -13,3 +13,5 @@ typer
 *.swp
 .idea
 
+makefile
+
